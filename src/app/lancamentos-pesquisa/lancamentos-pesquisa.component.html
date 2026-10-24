@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <h1>Lançamentos</h1>
+    </div>
+    <div class="col-12">
+      <label>Descrição</label>
+      <input type="text" pInputText fluid />
+    </div>
+    <div class="col-12">
+      <label style="display: block;">Vencimento</label>
+      <input type="text" pInputText style="width: 95px;" />
+      <label style="padding: 0 0.5em;">Até</label>
+      <input type="text" pInputText style="width: 95px;" />
+    </div>
+    <div class="col-12">
+      <!--<p-button label="Submit" fluid />-->
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="3" [rowsPerPageOptions]="[2, 3, 4]">
+        <ng-template #header>
+          <tr>
+            <th class="p-column-title">Pessoa</th>
+            <th class="p-column-title">Descrição</th>
+            <th class="p-column-title col-data-header">Vencimento</th>
+            <th class="p-column-title  col-data-header">Pagamento</th>
+            <th class="p-column-title  col-valor-header">Valor</th>
+            <th class="p-column-title"></th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-lancamento>
+          <tr>
+            <td class="p-column-title">{{ lancamento.pessoa }}</td>
+            <td class="p-column-title">{{ lancamento.descricao }}</td>
+            <td class=" p-column-title col-data-content">{{ lancamento.dataVencimento }}</td>
+            <td class=" p-column-title col-data-content">{{ lancamento.dataPagamento }}</td>
+            <td class=" p-column-title col-valor-content">
+              <!-- <td class="col-valor-content" [ngStyle]="{ color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">{{lancamento.valor}}</td> -->
+              <span [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor }} </span>
+            </td>
+            <td class="p-column-title col-acoes col-data-content">
+              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="col-12">
+      <a pButton label="Novo Lançamento"></a>
+    </div>
+  </div>
+</div>
+
+<router-outlet />
